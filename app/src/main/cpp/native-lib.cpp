@@ -10,13 +10,19 @@ using namespace cv;
 extern "C"
 {
 void JNICALL Java_ch_hepia_iti_opencvnativeandroidstudio_MainActivity_salt(JNIEnv *env, jobject instance,
-                                                                           jlong matAddrGray,
+                                                                           jlong frame,
                                                                            jint nbrElem) {
-    Mat &mGr = *(Mat *) matAddrGray;
+    Mat &img = *(Mat *) frame;
+    /*
     for (int k = 0; k < nbrElem; k++) {
-        int i = rand() % mGr.cols;
-        int j = rand() % mGr.rows;
-        mGr.at<uchar>(j, i) = 255;
+        int i = rand() % img.cols;
+        int j = rand() % img.rows;
+        img.at<uchar>(j, i) = 255;
     }
+     */
+
+    ostringstream ss;
+    ss << "hello world";
+    putText(img, ss.str(), Point(10, img.rows-20), FONT_HERSHEY_SIMPLEX, 0.6, Scalar(255,255,0),1);
 }
 }
