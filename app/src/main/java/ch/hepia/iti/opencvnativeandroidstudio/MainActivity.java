@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.TimingLogger;
 import android.view.SurfaceView;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -17,7 +18,7 @@ import org.opencv.core.Mat;
 
 public class MainActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
 
-    private static final String TAG = "OCVSample::Activity";
+    private static final String TAG = "Main";
     private CameraBridgeViewBase _cameraBridgeViewBase;
 
     private BaseLoaderCallback _baseLoaderCallback = new BaseLoaderCallback(this) {
@@ -112,8 +113,13 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     }
 
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        Mat matGray = inputFrame.gray();
+        TimingLogger timings = new TimingLogger(TAG, "onCameraFrame");
+        //Mat matGray = inputFrame.gray();
+        Mat matGray = inputFrame.rgba(); // 7ms
+        timings.addSplit("load frame");
         salt(matGray.getNativeObjAddr(), 2000);
+        timings.addSplit("salt");
+        timings.dumpToLog();
         return matGray;
     }
 

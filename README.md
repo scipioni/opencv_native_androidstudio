@@ -17,8 +17,8 @@ Usage
 Here is how to use this project to run native OpenCV code.
 
 * Make sure you have Android SDK up to date, with NDK installed and CMake
-* Download latest OpenCV SDK for Android from OpenCV.org and decompress the zip file.
 * Clone this project
+* Download latest OpenCV SDK for Android from OpenCV.org and decompress the zip file (make download)
 * Create a symlink named `jniLibs` in `app/src/main` that points to `YOUR_OPENCV_SDK/sdk/native/libs`
 * In `app/CMakeLists.txt` change line 9 to points to `YOUR_OPENCV_SDK/sdk/native/jni/include`
 * Sync gradle
