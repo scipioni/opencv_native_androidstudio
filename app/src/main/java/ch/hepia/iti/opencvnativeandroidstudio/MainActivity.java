@@ -113,7 +113,12 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     }
 
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
+
+        /* see logs with
+            adb shell setprop log.tag.Main VERBOSE
+         */
         TimingLogger timings = new TimingLogger(TAG, "onCameraFrame");
+
         //Mat matGray = inputFrame.gray();
         Mat matGray = inputFrame.rgba(); // 7ms
         timings.addSplit("load frame");
